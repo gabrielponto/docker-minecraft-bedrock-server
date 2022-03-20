@@ -155,7 +155,10 @@ if [ -n "$allowListUsers" ]; then
   export ALLOW_LIST=true
 fi
 
-set-property --file server.properties --bulk /etc/bds-property-definitions.json
+if [ ! -f "server.properties" ]; then
+  echo "Creating server.properties"
+  set-property --file server.properties --bulk /etc/bds-property-definitions.json
+fi
 
 export LD_LIBRARY_PATH=.
 
